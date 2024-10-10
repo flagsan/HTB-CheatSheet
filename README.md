@@ -2,7 +2,7 @@
 
 Now Updating...
 
-# Reconnaissance
+# Basics
 
 ## Nmap - Port Scanning
 
@@ -12,19 +12,19 @@ Now Updating...
 
 ```bash
 # Basic scan
-sudo nmap -v -sS -sC -sV --top-ports 3500 {target_ip}
+sudo nmap -v -sS -sC -sV --top-ports 3500 <target_ip>
 
 # Full scan
-sudo nmap -v -sS -A -p- {target_ip}
+sudo nmap -v -sS -A -p- <target_ip>
 
 # Use if no hosts respond to ping
-sudo nmap -v -sS -Pn {target_ip}
+sudo nmap -v -sS -Pn <target_ip>
 
 # Use if SYN scan takes too long
-nmap -v -sT -p- --min-rate 5000 --max-retries 1 {target_ip}
+nmap -v -sT -p- --min-rate 5000 --max-retries 1 <target_ip>
 
 # UDP scan
-nmap -v -sU -T4 --top-ports 100 {target_ip}
+nmap -v -sU -T4 --top-ports 100 <target_ip>
 ```
 
 ### NSE (Nmap Scripting Engine)
@@ -32,25 +32,25 @@ nmap -v -sU -T4 --top-ports 100 {target_ip}
 ```bash
 # Update system file database and search for NSE scripts
 sudo updatedb
-locate .nse | grep {script_name}
+locate .nse | grep <script_name>
 
 # Full vulnerability scan
 # Warning: --script-args=unsafe=1 may cause issues on target systems
-sudo nmap -v -sS -Pn --script=vuln --script-args=unsafe=1 {target_ip}
+sudo nmap -v -sS -Pn --script=vuln --script-args=unsafe=1 <target_ip>
 ```
 
-# Enumeration
+# Network Services Pentesting
 
-## HTTP
+## 80,443 - HTTP/HTTPS
 
 ### Directory Brute Forcing
 
 ```bash
 # Fast scan using a smaller wordlist for quick results
-gobuster dir -e -l -t 50 -u http://{target_host} -w /usr/share/wordlists/dirb/big.txt
+gobuster dir -e -l -t 50 -u http://<target_host> -w /usr/share/wordlists/dirb/big.txt
 
 # Full scan using a more comprehensive wordlist
-gobuster dir -e -l -t 50 -u http://{target_host} -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+gobuster dir -e -l -t 50 -u http://<target_host> -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
 
 # Additional useful wordlists
 /usr/share/seclists/Discovery/Web-Content/big.txt
@@ -77,10 +77,10 @@ gobuster dir -e -l -t 50 -u http://{target_host} -w /usr/share/wordlists/dirbust
 
 ```bash
 # Fast scan using a smaller wordlist for quick results
-ffuf -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-5000.txt -u http://{target_host}/ -H "Host: FUZZ.{target_host}" -H "User-Agent: PENTEST" -c -t 100 -ac -v
+ffuf -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-5000.txt -u http://<target_host>/ -H "Host: FUZZ.<target_host>" -H "User-Agent: PENTEST" -c -t 100 -ac -v
 
 # Full scan using a more comprehensive wordlist
-ffuf -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-110000.txt -u http://{target_host}/ -H "Host: FUZZ.{target_host}" -H "User-Agent: PENTEST" -c -t 100 -ac -v
+ffuf -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-110000.txt -u http://<target_host>/ -H "Host: FUZZ.<target_host>" -H "User-Agent: PENTEST" -c -t 100 -ac -v
 
 # Scan using a custom request file
 # - Add "FUZZ" keyword in the Host header of request.txt to inject subdomains
