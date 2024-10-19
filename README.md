@@ -155,3 +155,9 @@ enum4linux-ng -U -u <username> -p <password> <target_ip>
 
 
 # Windows Privilege Escalation
+
+## Abusing Tokens
+
+### SeBackupPrivilege
+- [Windows Privilege Escalation: SeBackupPrivilege](https://www.hackingarticles.in/windows-privilege-escalation-sebackupprivilege/)
+- [Windows PrivEsc with SeBackupPrivilege](https://medium.com/r3d-buck3t/windows-privesc-with-sebackupprivilege-65d2cd1eb960#5c26)
