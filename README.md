@@ -151,6 +151,9 @@ nxc smb <target_ip> -u <username> -p <password> --users --verbose
 enum4linux-ng -U -u <username> -p <password> <target_ip>
 ```
 
+# Web Application Analysis
+
+
 # Linux Privilege Escalation
 
 
