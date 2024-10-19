@@ -150,3 +150,8 @@ enum4linux-ng -R -r 500-550,1000-1500 -u 'guest' -p '' <target_ip>
 nxc smb <target_ip> -u <username> -p <password> --users --verbose
 enum4linux-ng -U -u <username> -p <password> <target_ip>
 ```
+
+# Linux Privilege Escalation
+
+
+# Windows Privilege Escalation
