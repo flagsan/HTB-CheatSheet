@@ -39,6 +39,24 @@ locate .nse | grep <script_name>
 sudo nmap -v -sS -Pn --script=vuln --script-args=unsafe=1 <target_ip>
 ```
 
+## Reverse shell
+
+### Upgrade Shell
+```bash
+script /dev/null -c /bin/bash
+python -c 'import pty; pty.spawn("/bin/bash")'
+
+# After spawning a pty, run these commands:
+# Suspend the current process
+CTRL+Z 
+# Configure the terminal and bring the background job to the foreground
+stty raw -echo; fg
+# Reset the terminal
+reset
+# Set the TERM environment variable for full terminal functionality
+export TERM=xterm
+```
+
 # Network Services Pentesting
 
 ## 80,443 - HTTP/HTTPS
