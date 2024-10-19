@@ -104,3 +104,31 @@ ffuf -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-5000.
 -of <format>         # Output file format (json, ejson, html, md, csv, ecsv)
 ```
 
+## 139,445 - SMB
+
+### Obtain Information
+```bash
+enum4linux-ng -A -u <username> -p <password> <target_ip>
+enum4linux -a -u <username> -p <password> <target_ip>
+enum4linux-ng -A -u 'guest' -p '' <target_ip>
+enum4linux -a -u 'guest' -p '' <target_ip>
+```
+
+### Get Sharelists
+```bash
+smbclient -N -L <target_ip>
+nxc smb <target_ip> -u 'guest' -p '' --shares --verbose
+```
+
+### Enumerate Users
+```bash
+# RID cycling with limited or no credentials
+# Useful for initial reconnaissance
+nxc smb <target_ip> -u 'guest' -p '' --rid-brute --verbose
+enum4linux-ng -R -r 500-550,1000-1500 -u 'guest' -p '' <target_ip>
+
+# Comprehensive user enumeration with valid credentials
+# Provides more detailed information
+nxc smb <target_ip> -u <username> -p <password> --users --verbose
+enum4linux-ng -U -u <username> -p <password> <target_ip>
+```
