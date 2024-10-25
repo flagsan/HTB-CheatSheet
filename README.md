@@ -52,8 +52,6 @@ python -c 'import pty; pty.spawn("/bin/bash")'
 CTRL+Z 
 # Configure the terminal and bring the background job to the foreground
 stty raw -echo; fg
-# Reset the terminal
-reset
 # Set the TERM environment variable for full terminal functionality
 export TERM=xterm
 ```
@@ -64,12 +62,14 @@ export TERM=xterm
 
 ```bash
 john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt
+john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt --format=<hash_type>
 
 # Convert shadow file to John format
 unshadow /etc/shadow /etc/passwd > hash.txt
 
 # Show cracked passwords
 john --show hash.txt
+john --show --format=<hash_type> hash.txt
 
 # Crack ZIP file password
 zip2john encrypted.zip > zip.hash
