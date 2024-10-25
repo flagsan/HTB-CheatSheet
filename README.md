@@ -84,10 +84,10 @@ john zip.hash
 
 ```bash
 # Fast scan using a smaller wordlist for quick results
-gobuster dir -e -l -t 50 -u http://<target_host> -w /usr/share/wordlists/dirb/big.txt
+gobuster dir -e -t 50 -u http://<target_host> -w /usr/share/wordlists/dirb/big.txt
 
 # Full scan using a more comprehensive wordlist
-gobuster dir -e -l -t 50 -u http://<target_host> -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+gobuster dir -e -t 50 -u http://<target_host> -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
 
 # Additional useful wordlists
 /usr/share/seclists/Discovery/Web-Content/big.txt
@@ -96,7 +96,6 @@ gobuster dir -e -l -t 50 -u http://<target_host> -w /usr/share/wordlists/dirbust
 
 # Gobuster options
 -e                          # Print full URLs in output
--l                          # Include the length of the body in the output
 -t <number>                 # Number of concurrent threads (default 10)
 -b <status>                 # Exclude status codes, comma separated list of codes and ranges
 --exclude-length <lengths>  # Exclude content lengths, comma separated list of codes and ranges
