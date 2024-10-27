@@ -234,3 +234,22 @@ sqlmap -r request.txt -p <target_param> --level=5 --risk=3 --batch --delay=0.1 -
 
 - [Windows Privilege Escalation: SeBackupPrivilege](https://www.hackingarticles.in/windows-privilege-escalation-sebackupprivilege/)
 - [Windows PrivEsc with SeBackupPrivilege](https://medium.com/r3d-buck3t/windows-privesc-with-sebackupprivilege-65d2cd1eb960#5c26)
+
+
+# Common Privilege Escalation Techniques
+
+## Chrome Remote Debugger
+
+- [Chrome Remote Debugger Pentesting](https://exploit-notes.hdks.org/exploit/linux/privilege-escalation/chrome-remote-debugger-pentesting/)
+- [Node inspector/CEF debug abuse](https://book.hacktricks.xyz/linux-hardening/privilege-escalation/electron-cef-chromium-debugger-abuse)
+
+```bash
+# === Linux ===
+# Check if Chrome remote debugging is running
+ps aux | grep remote-debugging-port
+
+# If --remote-debugging-port=0, a random open port is used
+# Use netstat to find potential Chrome-related ports and brute force them
+netstat -tuln
+```
+
