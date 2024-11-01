@@ -174,6 +174,13 @@ enum4linux-ng -U -u <username> -p <password> <target_ip>
 
 # Web Application Analysis
 
+## Fuzzing
+```bash
+# Basic ffuf command structure for web application fuzzing
+# -request-proto: Set the request protocol (http or https)
+ffuf -request request.txt -w <FUZZ_wordlist> -request-proto http -fs <size>
+```
+
 ## SQL Injection
 
 ### SQLMap
