@@ -266,6 +266,11 @@ netstat -tuln
 
 # CVEs
 
+## CVE-2022-0944: SQLPad[RCE]
+- Affecting SQLPad, versions<3.1.30
+- PoC exists
+> https://github.com/shhrew/CVE-2022-0944
+
 ## CVE-2022-24439: python-gitpython [RCE]
 - Affecting gitpython package, versions<3.1.30
 - PoC exists
