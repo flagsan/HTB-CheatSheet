@@ -62,6 +62,8 @@ export TERM=xterm
 
 ## Password Cracking
 
+### [Free Password Hash Cracker - CrackStation](https://crackstation.net/)
+
 ### John the Ripper
 
 ```bash
