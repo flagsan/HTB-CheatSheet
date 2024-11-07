@@ -274,25 +274,25 @@ netstat -tuln
 - Affecting Windows systems (Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008)
 - No authentication required
 - RCE with SYSTEM privileges
-- PoC exists
+- PoC/exploit exists
     > - Metasploit module: windows/smb/ms08_067_netapi
 
 ## CVE-2017-0144(EternalBlue): MS17-010[RCE]
 - Affecting Windows systems (Windows 7, Windows Server 2008, Windows Server 2012, etc.)
 - No authentication required
 - RCE with SYSTEM privileges
-- PoC exists
+- PoC/exploit exists
     > - https://github.com/d4t4s3c/Win7Blue  
     > - Metasploit module: windows/smb/ms17_010_eternalblue
 
 ## CVE-2022-0944: SQLPad[RCE]
 - Affecting SQLPad, versions<3.1.30
-- PoC exists
+- PoC/exploit exists
     > - https://github.com/shhrew/CVE-2022-0944  
 
 ## CVE-2022-24439: python-gitpython [RCE]
 - Affecting gitpython package, versions<3.1.30
-- PoC exists
+- PoC/exploit exists
     ```python
     from git import Repo
     r = Repo.init('', bare=True)
@@ -303,7 +303,7 @@ netstat -tuln
 ## CVE-2024-23334: python-aiohttp [Directory Traversal]
 - Affecting python-aiohttp package, versions<3.9.5-1
 - No authentication required
-- PoC exists
+- PoC/exploit exists
     ```bash
     #!/bin/bash
     url="http://localhost:8080"
@@ -326,6 +326,6 @@ netstat -tuln
 
 ## CVE-2024-23346: python-pymatgen [Command Injection]
 - Affecting pymatgen package, versions<2024.2.20
-- PoC exists
+- PoC/exploit exists
     > - https://security.snyk.io/vuln/SNYK-PYTHON-GITPYTHON-3113858
     > - https://ethicalhacking.uk/cve-2024-23346-arbitrary-code-execution-in-pymatgen-via-insecure/#gsc.tab=0  
