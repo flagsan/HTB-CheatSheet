@@ -270,9 +270,17 @@ netstat -tuln
 
 # CVEs
 
+## CVE-2008-4250: MS08-067[RCE]
+- Affecting Windows systems (Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008)
+- No authentication required
+- RCE with SYSTEM privileges
+- PoC exists
+    > - Metasploit module: windows/smb/ms08_067_netapi
+
 ## CVE-2017-0144(EternalBlue): MS17-010[RCE]
-- Affecting Windows systems (Windows 7, Windows Server 2008 R2, Windows Server 2012, etc.)
-- Exploits SMBv1 vulnerability
+- Affecting Windows systems (Windows 7, Windows Server 2008, Windows Server 2012, etc.)
+- No authentication required
+- RCE with SYSTEM privileges
 - PoC exists
     > - https://github.com/d4t4s3c/Win7Blue  
     > - Metasploit module: windows/smb/ms17_010_eternalblue
@@ -294,6 +302,7 @@ netstat -tuln
 
 ## CVE-2024-23334: python-aiohttp [Directory Traversal]
 - Affecting python-aiohttp package, versions<3.9.5-1
+- No authentication required
 - PoC exists
     ```bash
     #!/bin/bash
