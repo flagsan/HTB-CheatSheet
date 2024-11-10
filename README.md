@@ -293,13 +293,13 @@ netstat -tuln
 - PoC/exploit exists
     > - Metasploit module: multi/samba/usermap_script
 
-## CVE-2008-4250: MS08-067 [RCE]
+## CVE-2008-4250: Windows MS08-067 [RCE]
 - Affecting Windows systems (Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008)
 - No authentication required
 - PoC/exploit exists
     > - Metasploit module: windows/smb/ms08_067_netapi
 
-## CVE-2017-0144(EternalBlue): MS17-010 [RCE]
+## CVE-2017-0144(EternalBlue): Windows MS17-010 [RCE]
 - Affecting Windows systems (Windows 7, Windows Server 2008, Windows Server 2012, etc.)
 - No authentication required
 - PoC/exploit exists
@@ -351,8 +351,7 @@ netstat -tuln
     > - https://security.snyk.io/vuln/SNYK-PYTHON-GITPYTHON-3113858
     > - https://ethicalhacking.uk/cve-2024-23346-arbitrary-code-execution-in-pymatgen-via-insecure/#gsc.tab=0
 
-## N/A: PHP [RCE]
-- PHP version 8.1.0-dev Backdoor Remote Code Execution
+## N/A: PHP 8.1.0-dev Backdoor [RCE]
 - No authentication required
 - PoC/exploit exists
     > - https://github.com/flast101/php-8.1.0-dev-backdoor-rce
