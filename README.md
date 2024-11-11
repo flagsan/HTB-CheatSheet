@@ -275,7 +275,7 @@ sudo -u#-1 /bin/bash
 # List privileges for the current user
 sudo -l
 
-# If the output shows `(user:user) NOPASSWD: ALL`, execute a command as 'testuser'
+# If the output shows `(testuser:testuser) NOPASSWD: ALL`, execute a command as 'testuser'
 sudo -u testuser /bin/bash
 ```
 
