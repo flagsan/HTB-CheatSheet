@@ -326,7 +326,7 @@ systemctl --version
 # 1. Execute systemctl status as root on any service (existing or non-existing)
 sudo systemctl status example.service
 
-# 2. In the pager (like less) that opens, enter one of the following commands to spawn a root shell
+# 2. In the pager (like less) that opens, try the following commands to spawn a root shell
 !sh
 ```
 
