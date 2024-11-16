@@ -380,32 +380,32 @@ netstat -tuln
 # CVEs
 
 ## CVE-2007-2447: Samba [RCE]
-- Affecting samba package, versions 3.0.0 - 3.0.25rc3 (inclusive)
-- No authentication required
-- PoC/exploit exists
+- Affects: Samba package, versions 3.0.0 - 3.0.25rc3 (inclusive)
+- Notes: No authentication required
+- Exploits:
     > - Metasploit module: multi/samba/usermap_script
 
 ## CVE-2008-4250: Windows MS08-067 [RCE]
-- Affecting Windows systems (Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008)
-- No authentication required
-- PoC/exploit exists
+- Affects: Windows systems (Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008)
+- Notes: No authentication required
+- Exploits:
     > - Metasploit module: windows/smb/ms08_067_netapi
 
 ## CVE-2017-0144(EternalBlue): Windows MS17-010 [RCE]
-- Affecting Windows systems (Windows 7, Windows Server 2008, Windows Server 2012, etc.)
-- No authentication required
-- PoC/exploit exists
+- Affects: Windows systems (Windows 7, Windows Server 2008, Windows Server 2012, etc.)
+- Notes: No authentication required
+- Exploits: 
     > - https://github.com/d4t4s3c/Win7Blue  
     > - Metasploit module: windows/smb/ms17_010_eternalblue
 
 ## CVE-2022-0944: SQLPad [RCE]
-- Affecting SQLPad, versions < 3.1.30
-- PoC/exploit exists
+- Affects: SQLPad, versions < 3.1.30
+- Exploits: 
     > - https://github.com/shhrew/CVE-2022-0944  
 
-## CVE-2022-24439: python-gitpython [RCE]
-- Affecting gitpython package, versions < 3.1.30
-- PoC/exploit exists
+## CVE-2022-24439: Python-Gitpython [RCE]
+- Affects: gitpython package, versions < 3.1.30
+- Exploits: 
     ```python
     from git import Repo
     r = Repo.init('', bare=True)
@@ -414,15 +414,15 @@ netstat -tuln
     > https://security.snyk.io/vuln/SNYK-PYTHON-GITPYTHON-3113858  
 
 ## CVE-2022-37706: Enlightenment [LPE]
-- Affecting `enlightenment_sys` binary in Enlightenment, versions < 0.25.4
+- Affects: `enlightenment_sys` binary in Enlightenment, versions < 0.25.4
 - Requires: `enlightenment_sys` must be setuid root
-- PoC/exploit exists
+- Exploits: 
     > - https://github.com/MaherAzzouzi/CVE-2022-37706-LPE-exploit
 
-## CVE-2024-23334: python-aiohttp [Directory Traversal]
-- Affecting python-aiohttp package, versions < 3.9.5-1
-- No authentication required
-- PoC/exploit exists
+## CVE-2024-23334: Python-Aiohttp [Directory Traversal]
+- Affects: aiohttp package, versions < 3.9.5-1
+- Notes: No authentication required
+- Exploits: 
     ```bash
     #!/bin/bash
     url="http://localhost:8080"
@@ -443,13 +443,13 @@ netstat -tuln
     > - https://security.snyk.io/vuln/SNYK-DEBIAN13-PYTHONAIOHTTP-6210121
     > - https://github.com/z3rObyte/CVE-2024-23334-PoC  
 
-## CVE-2024-23346: python-pymatgen [Command Injection]
-- Affecting pymatgen package, versions < 2024.2.20
-- PoC/exploit exists
+## CVE-2024-23346: Python-Pymatgen [Command Injection]
+- Affects: pymatgen package, versions < 2024.2.20
+- Exploits: 
     > - https://security.snyk.io/vuln/SNYK-PYTHON-GITPYTHON-3113858
     > - https://ethicalhacking.uk/cve-2024-23346-arbitrary-code-execution-in-pymatgen-via-insecure/#gsc.tab=0
 
 ## N/A: PHP 8.1.0-dev Backdoor [RCE]
-- No authentication required
-- PoC/exploit exists
+- Notes: No authentication required
+- Exploits: 
     > - https://github.com/flast101/php-8.1.0-dev-backdoor-rce
