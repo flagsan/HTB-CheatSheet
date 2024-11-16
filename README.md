@@ -413,6 +413,12 @@ netstat -tuln
     ```
     > https://security.snyk.io/vuln/SNYK-PYTHON-GITPYTHON-3113858  
 
+## CVE-2022-37706: Enlightenment [LPE]
+- Affecting `enlightenment_sys` binary in Enlightenment, versions < 0.25.4
+- Requires: `enlightenment_sys` must be setuid root
+- PoC/exploit exists
+    > - https://github.com/MaherAzzouzi/CVE-2022-37706-LPE-exploit
+
 ## CVE-2024-23334: python-aiohttp [Directory Traversal]
 - Affecting python-aiohttp package, versions < 3.9.5-1
 - No authentication required
