@@ -60,6 +60,25 @@ stty raw -echo; fg
 export TERM=xterm
 ```
 
+## Port Fowarding
+
+### Chisel
+#### Local Port Fowarding
+```bash
+# On the remote machine (server)
+./chisel server --port 1111
+# On the local machine (client)
+./chisel client <remote_ip>:1111 localhost:<local_port>:<target_ip>:<target_port>
+```
+
+#### Remote Port Fowarding
+```bash
+# On the local machine (server)
+./chisel server --port 1111 --reverse
+# On the remote machine (client)
+./chisel client <local_ip>:1111 R:<local_port>:<target_ip>:<target_port>
+```
+
 ## Password Cracking
 
 ### [Free Password Hash Cracker - CrackStation](https://crackstation.net/)
