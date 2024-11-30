@@ -63,16 +63,14 @@ export TERM=xterm
 ## Port Fowarding
 
 ### Chisel
-#### Local Port Fowarding
 ```bash
+# === Local Port Fowarding ===
 # On the remote machine (server)
 ./chisel server --port 1111
 # On the local machine (client)
 ./chisel client <remote_ip>:1111 localhost:<local_port>:<target_ip>:<target_port>
-```
 
-#### Remote Port Fowarding
-```bash
+# === Remote Port Fowarding ===
 # On the local machine (server)
 ./chisel server --port 1111 --reverse
 # On the remote machine (client)
