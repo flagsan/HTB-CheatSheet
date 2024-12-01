@@ -113,8 +113,8 @@ gobuster dir -e -t 50 -u http://<target_host> -w /usr/share/wordlists/dirb/big.t
 gobuster dir -e -t 50 -u http://<target_host> -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
 
 # Additional useful wordlists
-/usr/share/seclists/Discovery/Web-Content/big.txt
-/usr/share/seclists/Discovery/Web-Content/directory-list-lowercase-2.3-medium.txt
+/usr/share/seclists/Discovery/Web-Content/quickhits.txt
+/usr/share/seclists/Discovery/Web-Content/common.txt
 /usr/share/seclists/Discovery/Web-Content/raft-medium-directories.txt
 
 # Gobuster options
